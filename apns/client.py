@@ -6,6 +6,7 @@ import logging
 from uuid import UUID
 
 from hyper import HTTP20Connection
+from hyper.common.headers import HTTPHeaderMap
 
 from ._compat import binary_type
 from .exceptions import _map
@@ -50,6 +51,7 @@ class Client(object):
         self._connection = HTTP20Connection(
             self.host,
             port=self.port,
+            force_proto='h2',
             ssl_context=ssl_context
         )
 
@@ -78,12 +80,11 @@ class Client(object):
         """
         assert token, 'Token cannot be empty or null'
 
-        path = '/3/device/' + token
         stream_id = self._connection.request(
             'POST',
-            path,
-            body=message.encoded,
-            headers=message.headers
+            '/3/device/' + token,
+            headers=message.headers,
+            body=message.encoded
         )
 
         response = self._connection.get_response(stream_id)
