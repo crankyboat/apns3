@@ -1,1 +1,1 @@
-hyper
+hyper>=0.6.2
