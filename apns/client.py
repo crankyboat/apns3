@@ -82,7 +82,7 @@ class Client(object):
 
         stream_id = self._connection.request(
             'POST',
-            '/3/device/' + token,
+            '/3/device/{}'.format(token),
             headers=message.headers,
             body=message.encoded
         )

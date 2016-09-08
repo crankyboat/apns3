@@ -168,11 +168,11 @@ class Message(object):
 
         hdrs = {
             'apns-id': _id,
-            'apns-topic': str(self.topic) if self.topic else None,
-            'apns-priority': str(self.priority) if self.priority else None,
-            'apns-expiration': str(_exp) if _exp else None,
+            'apns-topic': str(self.topic),
+            'apns-priority': str(self.priority),
+            'apns-expiration': str(_exp),
         }
-        return {k: v for k, v in iteritems(hdrs) if v is not None}
+        return {k: v for k, v in iteritems(hdrs) if v != 'None'}
 
     @property
     def id(self):
