@@ -165,6 +165,7 @@ class Message(object):
         _exp = EXPIRE_IMMEDIATELY
         if self.expiration:
             _exp = self.expiration - _EPOCH
+            _exp = int(_exp.total_seconds())
 
         hdrs = {
             'apns-id': _id,
